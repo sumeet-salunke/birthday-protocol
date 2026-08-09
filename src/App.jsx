@@ -8,6 +8,7 @@ import Scene6_MainMessage from './components/Scene6_MainMessage';
 import Scene7_Interactive from './components/Scene7_Interactive';
 import Scene8_Ending from './components/Scene8_Ending';
 import AudioController from './components/AudioController';
+import Spotlight from './components/Spotlight';
 import useEasterEggs from './hooks/useEasterEggs';
 import './index.css';
 
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <div className="w-full h-screen bg-black overflow-hidden relative">
+      <Spotlight />
       <AudioController audioEnabled={audioEnabled} setAudioEnabled={setAudioEnabled} />
 
       {currentScene === 1 && <Scene1_BlackScreen onComplete={nextScene} />}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { Gift, Heart, Sparkles, Camera } from 'lucide-react';
+import Tilt from 'react-parallax-tilt';
 
 const BirthdayCake = () => {
   const [cut, setCut] = useState(false);
@@ -157,29 +158,32 @@ export default function Scene7_Interactive({ onComplete }) {
         {activeTab === 'memories' && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-6 overflow-x-auto max-w-full pb-8 px-8 snap-x" onClick={e => e.stopPropagation()}>
             {[1, 2, 3].map((item) => (
-              <motion.div key={item} whileHover={{ y: -10, rotate: item % 2 === 0 ? 3 : -3 }} className="snap-center shrink-0 w-64 p-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl flex flex-col items-center">
-                <div className="w-full h-48 bg-black/40 rounded-lg mb-4 flex items-center justify-center border border-white/5">
-                  <Heart className="text-bday-pink/50" size={48} />
+              <Tilt key={item} glareEnable={true} glareMaxOpacity={0.3} glareColor="#ffffff" glarePosition="all" scale={1.05} className="snap-center shrink-0 w-64">
+                <div className="h-full p-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl flex flex-col items-center">
+                  <div className="w-full h-48 bg-black/40 rounded-lg mb-4 flex items-center justify-center border border-white/5">
+                    <Heart className="text-bday-pink/50" size={48} />
+                  </div>
+                  <p className="text-white/90 font-medium text-center text-lg">Memory {item}<br/><span className="text-sm text-white/60">Cherished moments</span></p>
                 </div>
-                <p className="text-white/90 font-medium text-center text-lg">Memory {item}<br/><span className="text-sm text-white/60">Cherished moments</span></p>
-              </motion.div>
+              </Tilt>
             ))}
           </motion.div>
         )}
 
         {activeTab === 'gift' && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center">
-            <motion.div 
-              whileHover={{ scale: 1.1, rotate: [0, -5, 5, -5, 0] }}
-              whileTap={{ scale: 0.9 }}
-              className="cursor-pointer mb-8"
-              onClick={(e) => { e.stopPropagation(); showToast("Lifetime Premium Friendship\nPrice: FREE ❤️"); }}
-            >
-              <div className="w-40 h-40 bg-gradient-to-br from-bday-gold to-bday-orange rounded-2xl shadow-[0_0_40px_rgba(255,215,0,0.4)] flex items-center justify-center border-2 border-white/30 relative overflow-hidden">
-                <div className="absolute top-0 w-full h-8 bg-white/20 blur-sm"></div>
-                <Gift size={80} className="text-white" />
-              </div>
-            </motion.div>
+            <Tilt glareEnable={true} glareMaxOpacity={0.8} glareColor="#fff" scale={1.1}>
+              <motion.div 
+                whileTap={{ scale: 0.95 }}
+                className="cursor-pointer mb-8"
+                onClick={(e) => { e.stopPropagation(); showToast("Lifetime Premium Friendship\nPrice: FREE ❤️"); }}
+              >
+                <div className="w-40 h-40 bg-gradient-to-br from-bday-gold to-bday-orange rounded-2xl shadow-[0_0_40px_rgba(255,215,0,0.4)] flex items-center justify-center border-2 border-white/30 relative overflow-hidden">
+                  <div className="absolute top-0 w-full h-8 bg-white/20 blur-sm"></div>
+                  <Gift size={80} className="text-white" />
+                </div>
+              </motion.div>
+            </Tilt>
             <p className="text-white/80 text-xl font-medium">Click to open your gift!</p>
           </motion.div>
         )}
